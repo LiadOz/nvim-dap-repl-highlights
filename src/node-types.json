@@ -1,0 +1,126 @@
+[
+  {
+    "type": "entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "output",
+          "named": true
+        },
+        {
+          "type": "prompt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "output",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "output_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "output_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "prompt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "prompt_tag",
+          "named": true
+        },
+        {
+          "type": "user_input",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "user_input",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "continue_prompt_tag",
+          "named": true
+        },
+        {
+          "type": "user_input_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "user_input_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "user_input_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "user_input_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "continue_prompt_tag",
+    "named": true
+  },
+  {
+    "type": "prompt_tag",
+    "named": true
+  }
+]

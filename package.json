@@ -1,0 +1,26 @@
+{
+  "name": "tree-sitter-nvim-dap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.nvimdap",
+      "file-types": [
+        "dap",
+        "nvimdap"
+      ]
+    }
+  ]
+}
