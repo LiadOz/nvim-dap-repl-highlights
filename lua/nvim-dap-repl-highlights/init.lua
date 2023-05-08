@@ -22,10 +22,13 @@ function M.setup_highlights(language, bufnr)
   bufnr = bufnr or 0
   if language then
     M.setup_injections(bufnr, language)
+  else
+    vim.ui.input({prompt = 'Enter language parser name: '}, function(input)
+      if input then
+        M.setup_injections(bufnr, input)
+      end
+    end)
   end
-  vim.ui.input({prompt = 'Enter language parser name: '}, function(input)
-    M.setup_injections(bufnr, input)
-  end)
 end
 
 function M.setup()
