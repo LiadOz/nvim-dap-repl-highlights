@@ -13,7 +13,7 @@ function M.setup_injections(bufnr, injected_lang)
     return
   end
   local injections = {}
-  injections[M.PARSER_NAME] = '((user_input_statement) @content @combined (#set! language ' .. injected_lang .. '))'
+  injections[M.PARSER_NAME] = '((user_input_statement) @injection.content (#set! injection.language "' .. injected_lang .. '") (#set! injection.combined) (#set! injection.include-children))'
   local tsparser = vim.treesitter.get_parser(bufnr, M.PARSER_NAME, {injections = injections})
   vim.treesitter.highlighter.new(tsparser)
 end
