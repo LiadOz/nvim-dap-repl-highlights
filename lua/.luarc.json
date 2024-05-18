@@ -1,0 +1,8 @@
+{
+    "workspace.library": [
+        "/home/ozonzono/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
+        "/tmp/.mount_nvim.aVilBes/usr/share/nvim/runtime/lua",
+        "/home/ozonzono/projects/nvim_plugins/nvim-dap-repl-highlights/lua",
+        "${3rd}/luv/library"
+    ]
+}
