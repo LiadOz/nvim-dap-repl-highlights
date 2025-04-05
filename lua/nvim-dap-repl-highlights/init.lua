@@ -25,10 +25,14 @@ function M.setup_highlights(language, bufnr)
   else
     vim.ui.input({prompt = 'Enter language parser name: '}, function(input)
       if input then
+        local ok, ts_lang = pcall(require("nvim-treesitter.parsers").ft_to_lang, input)
+        if ok then input = ts_lang end
         M.setup_injections(bufnr, input)
+        language = input
       end
     end)
   end
+  return language
 end
 
 function M.setup()

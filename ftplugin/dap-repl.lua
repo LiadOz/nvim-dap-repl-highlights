@@ -1,5 +1,6 @@
+local utils = require('nvim-dap-repl-highlights.utils')
 local session = require('dap').session()
-local lang = nil
+local lang = utils.lang
 
 if session then
   lang = session.config and session.config.repl_lang
@@ -12,6 +13,6 @@ if session then
   end
 end
 
-if lang and lang ~= '' then
-  require('nvim-dap-repl-highlights').setup_injections(0, lang)
+if lang ~= '' then
+  utils.lang = require('nvim-dap-repl-highlights').setup_highlights(lang, 0)
 end
