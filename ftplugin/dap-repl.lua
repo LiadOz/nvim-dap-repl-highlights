@@ -1,17 +1,23 @@
-local session = require('dap').session()
-local lang = nil
+local dap = require('dap')
+local repl_hl = require('nvim-dap-repl-highlights')
 
-if session then
-  lang = session.config and session.config.repl_lang
-  if lang == nil then
-    local ok, ts_lang = pcall(require("nvim-treesitter.parsers").ft_to_lang, session.filetype)
-    if ok then lang = ts_lang end
-  end
-  if not lang then -- allow user to provide empty string to supress this message
-    vim.notify("REPL highlight language not found for current dap session", vim.log.levels.WARN)
-  end
+local bufnr = vim.api.nvim_get_current_buf()
+local listener_name = "nvim-dap-repl-highlights.init_listner_buf_" .. bufnr
+
+local function setup_injections(session)
+  local lang = repl_hl.get_repl_lang_for_session(session)
+  repl_hl.setup_injections(bufnr, lang)
 end
 
-if lang and lang ~= '' then
-  require('nvim-dap-repl-highlights').setup_injections(0, lang)
+-- setup injection on existing buffer
+dap.listeners.after.event_initialized[listener_name] = function (session, _)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    -- removing listeners in case the buffer is no longer valid
+    dap.listeners.after.event_initialized[listener_name] = nil
+    return
+  end
+  setup_injections(session)
 end
+
+local session = dap.session()
+setup_injections(session)
