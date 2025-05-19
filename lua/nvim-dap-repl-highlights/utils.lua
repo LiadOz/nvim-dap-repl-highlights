@@ -1,9 +1,9 @@
 local M = {}
 
 function M.check_treesitter_parser_exists(language)
-  local installed_parsers = require("nvim-treesitter.info").installed_parsers()
-  for _, parser in ipairs(installed_parsers) do
-    if parser == language then
+  local install_dir = require("nvim-treesitter.config").get_install_dir("parser")
+  for f in vim.fs.dir(install_dir) do
+    if vim.fn.fnamemodify(f, ":t:r") == language then
       return true
     end
   end
