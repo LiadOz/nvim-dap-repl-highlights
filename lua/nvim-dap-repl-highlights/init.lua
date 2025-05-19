@@ -60,13 +60,16 @@ function M.setup_highlights(language, bufnr)
 end
 
 function M.setup()
-  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-  parser_config[M.PARSER_NAME] = {
-    install_info = {
-      url = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h:h:h"),
-      files = { "src/parser.c" },
-    },
-  }
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "TSUpdate",
+    callback = function()
+      require("nvim-treesitter.parsers")[M.PARSER_NAME] = {
+        install_info = {
+          path = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h:h:h"),
+        },
+      }
+    end,
+  })
 end
 
 
