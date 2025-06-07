@@ -5,6 +5,9 @@ local bufnr = vim.api.nvim_get_current_buf()
 local listener_name = "nvim-dap-repl-highlights.init_listner_buf_" .. bufnr
 
 local function setup_injections(session)
+  if not bufnr then
+    return
+  end
   local lang = repl_hl.get_repl_lang_for_session(session)
   repl_hl.setup_injections(bufnr, lang)
 end
