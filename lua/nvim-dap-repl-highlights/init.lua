@@ -60,13 +60,31 @@ function M.setup_highlights(language, bufnr)
 end
 
 function M.setup()
-  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-  parser_config[M.PARSER_NAME] = {
-    install_info = {
-      url = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h:h:h"),
-      files = { "src/parser.c" },
-    },
-  }
+  local ts_parsers = require("nvim-treesitter.parsers")
+  local parser_path = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h:h:h")
+
+  -- Try to call the function that only exists in nvim-treesitter's master branch
+  local ok, parser_config = pcall(ts_parsers.get_parser_configs)
+  if ok then
+    parser_config[M.PARSER_NAME] = {
+      install_info = {
+        url = parser_path,
+        files = { "src/parser.c" },
+      },
+    }
+  else
+    vim.api.nvim_create_autocmd("User", {
+      group = vim.api.nvim_create_augroup("nvim_dap_repl_highlights"),
+      pattern = "TSUpdate",
+      callback = function()
+        ts_parsers[M.PARSER_NAME] = {
+          install_info = {
+            path =  parser_path,
+          },
+        }
+      end,
+    })
+  end
 end
 
 
