@@ -13,18 +13,7 @@ Install the plugin and the requirements using your favourite method. Once instal
 ```lua
 require('nvim-dap-repl-highlights').setup()
 ```
-After initially setting up the plugin the dap_repl parser needs to be installed, this can be done manually by running `:TSInstall dap_repl` or by using the `ensure_installed` option of nvim-treesitter.
-**NOTE:** If you use the `ensure_installed` option you must first setup `nvim-dap-repl-highlights` or else the `dap_repl` parser won't be found, for example
-```lua
-require('nvim-dap-repl-highlights').setup()
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-  },
-  ensure_installed = { 'dap_repl', ... },
-  ...
-}
-```
+After initially setting up the plugin the dap_repl parser needs to be installed, this can be done manually by running `:TSInstall dap_repl`.
 
 ## Usage
 By default, the plugin detects the language to use in the REPL by looking at the **filetype** used to to launch dap. Obviously in order to have syntax highlighting for certain language you will need to have a treesitter parser for that language, alongside the `dap_repl` parser.
