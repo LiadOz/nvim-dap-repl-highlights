@@ -74,7 +74,7 @@ function M.setup()
     }
   else
     vim.api.nvim_create_autocmd("User", {
-      group = vim.api.nvim_create_augroup("nvim_dap_repl_highlights"),
+      group = vim.api.nvim_create_augroup("nvim_dap_repl_highlights", {}),
       pattern = "TSUpdate",
       callback = function()
         ts_parsers[M.PARSER_NAME] = {
