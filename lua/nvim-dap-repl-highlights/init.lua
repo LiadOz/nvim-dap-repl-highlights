@@ -73,13 +73,15 @@ function M.setup()
       },
     }
   else
+    -- `main` branch
     vim.api.nvim_create_autocmd("User", {
       group = vim.api.nvim_create_augroup("nvim_dap_repl_highlights", {}),
       pattern = "TSUpdate",
       callback = function()
-        ts_parsers[M.PARSER_NAME] = {
+        -- This `require` statement must be inlined. Otherwise, the `parsers` table will be reset.
+        require("nvim-treesitter.parsers")[M.PARSER_NAME] = {
           install_info = {
-            path =  parser_path,
+            path = parser_path,
           },
         }
       end,
